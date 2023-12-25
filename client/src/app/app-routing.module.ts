@@ -6,6 +6,7 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
 import { ServerErrorComponent } from './core/server-error/server-error.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { TestErrorComponent } from './core/test-error/test-error.component';
+import { BasketComponent } from './basket/basket.component';
 
 const routes: Routes = [
   {path:'',component: HomeComponent, data:{breadcrumb:'Ana Sayfa'}},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path:'server-error',component: ServerErrorComponent, data:{breadcrumb:'Server Error'}},
   {path:'not-found',component: NotFoundComponent, data:{breadcrumb:'Not Found'}},
   {path:'shop',component: ShopComponent, data:{breadcrumb:'shop'}},
+  {path:'basket',component: BasketComponent, data:{breadcrumb:'basket'}},
   {path:'shop/:id',component: ProductDetailsComponent, data:{breadcrumb:{alias:'shopDetail'}}},
   {path:'**',redirectTo: '',pathMatch:'full'}
 ];

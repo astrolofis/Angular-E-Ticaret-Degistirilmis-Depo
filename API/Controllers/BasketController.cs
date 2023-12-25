@@ -1,6 +1,7 @@
 ﻿using API.Core.DbModels;
 using API.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -8,6 +9,7 @@ namespace API.Controllers
     public class BasketController : BaseApiController
     {
         private readonly IBasketRepository _basketRepository;
+
         public BasketController( IBasketRepository basketRepository)
         {
             _basketRepository = basketRepository;
@@ -23,7 +25,12 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasket basket)
         {
-            var updatedBasket= _basketRepository.UpdateBasketAsync(basket);
+            if (basket.Id == null)
+            {
+                var newGuidValue= Guid.NewGuid();
+                basket.Id = newGuidValue.ToString();
+            }
+            var updatedBasket= await _basketRepository.UpdateBasketAsync(basket);
             return Ok(updatedBasket);
         }
 
