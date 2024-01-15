@@ -14,9 +14,6 @@ namespace API.Core.Interfaces
 
         Task<int> Complete();
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

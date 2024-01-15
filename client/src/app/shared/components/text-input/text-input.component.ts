@@ -1,52 +1,50 @@
-import { Component, ElementRef, Input, OnInit, Self, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  Self,
+  ViewChild,
+} from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-text-input',
   templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.css']
+  styleUrls: ['./text-input.component.css'],
 })
 export class TextInputComponent implements OnInit, ControlValueAccessor {
+  @ViewChild('input', { static: true }) input: ElementRef;
+  @Input() type = 'text';
+  @Input() label: string;
 
-  @ViewChild('input', {static:true}) input: ElementRef;
-  @Input() type ='text';
-  @Input() label : string;
-
-
-  constructor(@Self() public controlDir:NgControl){
+  constructor(@Self() public controlDir: NgControl) {
     this.controlDir.valueAccessor = this;
-
   }
 
   ngOnInit() {
-    const control= this.controlDir.control;
-    const validators= control.validator ?[control.validator]: [];
-    const asyncValidator= control.asyncValidator ? [control.asyncValidator]  : [];
-    
+    const control = this.controlDir.control;
+    const validators = control.validator ? [control.validator] : [];
+    const asyncValidator = control.asyncValidator
+      ? [control.asyncValidator]
+      : [];
+
     control.setValidators(validators);
     control.setAsyncValidators(asyncValidator);
     control.updateValueAndValidity();
   }
 
-  onChange(event){
+  onChange(event) {}
 
-  }
-
-  onTouched(){
-
-  }
+  onTouched() {}
 
   writeValue(obj: any): void {
-    this.input.nativeElement.value=obj || '';
+    this.input.nativeElement.value = obj || '';
   }
   registerOnChange(fn: any): void {
-    this.onChange=fn;
+    this.onChange = fn;
   }
   registerOnTouched(fn: any): void {
-    this.onTouched=fn;
+    this.onTouched = fn;
   }
-  
-
-  
-
 }
